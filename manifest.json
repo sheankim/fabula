@@ -2,8 +2,8 @@
   "name": "fabula",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.io",
-  //"homepage_url": "http://extensionizr.com",
+  "description": "A browser extension that gives you updates from all of your favorite social networks",
+  "homepage_url": "http://cs.virginia.edu",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -11,9 +11,10 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": [
-      "src/bg/background.js"
-    ],
+    // "scripts": [
+    //   "src/bg/background.js"
+    // ],
+    "page": "src/bg/background.html",
     "persistent": true
   },
   "options_page": "src/options/index.html",
@@ -28,25 +29,26 @@
     "idle",
     "notifications",
     "geolocation",
+    "tabs",
     "https://*.twitter.com/*",
     "https://*.facebook.com/*",
     "https://*.instagram.com/*"
   ],
-   "content_scripts": [
-        {
-            "matches": [
-            // add other oauth authorizing components for facebook and instagram here 
-                "http://twitter.com/oauth/authorize",
-                "https://twitter.com/oauth/authorize",
-                "http://api.twitter.com/oauth/authorize",
-                "https://api.twitter.com/oauth/authorize"
-            ],
-            "js": [
-                "js/jquery/jquery.js",
-                "oauth/oauth_authorizer.js"
-            ]
-        }
-      
-    ]
-
+  "content_scripts": [
+    {
+      "matches": [
+        // add other oauth authorizing components for facebook and instagram here
+        "http://twitter.com/oauth/authorize",
+        "https://twitter.com/oauth/authorize",
+        "http://api.twitter.com/oauth/authorize",
+        "https://api.twitter.com/oauth/authorize",
+        "https://instagram.com/oauth/authorize/*",
+        "http://*/*", "https://*/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "oauth/oauth_authorizer.js"
+      ]
+    }
+  ]
 }
