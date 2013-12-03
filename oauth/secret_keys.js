@@ -17,8 +17,6 @@ var SecretKeys = {
   instagram: {
     client_id: '07b4ee0d5e2342628ea01a47e26a3cac',
     client_secret: '2740eb3635404471938fd92dc3b85815',
-    redirect_uri: 'https://www.example.com',
-    auth_url: 'https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code'
   },
 
   hasValidKeys: function() {

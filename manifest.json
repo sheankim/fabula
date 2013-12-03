@@ -2,8 +2,11 @@
   "name": "fabula",
   "version": "0.0.1",
   "manifest_version": 2,
+  "minimum_chrome_version": "29",
   "description": "A browser extension that gives you updates from all of your favorite social networks",
   "homepage_url": "http://cs.virginia.edu",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDth91jxOpPpN5hQFT1uAUJPLwyeOKaqNMBoEF1s7y9aMGsnx4Sxmg+eQsuTdgtJbHfMHYUIAxqvpXvHYCWXQ9gJLOZ7CbZzoRU2SimAOIF8Pro2CjxRMMT1nNA5EAjUR52h94",
+
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -11,9 +14,6 @@
   },
   "default_locale": "en",
   "background": {
-    // "scripts": [
-    //   "src/bg/background.js"
-    // ],
     "page": "src/bg/background.html",
     "persistent": true
   },
@@ -24,15 +24,12 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
-    "chrome://favicon/",
-    "clipboardWrite",
-    "idle",
+    "identity",
     "notifications",
     "geolocation",
-    "tabs",
     "https://*.twitter.com/*",
     "https://*.facebook.com/*",
-    "https://*.instagram.com/*"
+    "https://api.instagram.com/*"
   ],
   "content_scripts": [
     {
@@ -41,9 +38,7 @@
         "http://twitter.com/oauth/authorize",
         "https://twitter.com/oauth/authorize",
         "http://api.twitter.com/oauth/authorize",
-        "https://api.twitter.com/oauth/authorize",
-        "https://instagram.com/oauth/authorize/*",
-        "http://*/*", "https://*/*"
+        "https://api.twitter.com/oauth/authorize"
       ],
       "js": [
         "js/jquery/jquery.js",
