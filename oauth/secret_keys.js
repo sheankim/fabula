@@ -10,8 +10,8 @@
 //TODO: the secret keys actually need to be secret
 var SecretKeys = {
   twitter: {
-    consumerSecret: 'AGG3mit5cWiDo87f7x0hDL2tRt8k55XhsYRMZ3XwCHg',
-    consumerKey: 'zO6E8kLJB6DyQVoh9Jfrng'
+    client_secret: 'AGG3mit5cWiDo87f7x0hDL2tRt8k55XhsYRMZ3XwCHg',
+    client_id: 'zO6E8kLJB6DyQVoh9Jfrng'
   },
   
   facebook:{
