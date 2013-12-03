@@ -5,7 +5,7 @@
   "minimum_chrome_version": "29",
   "description": "A browser extension that gives you updates from all of your favorite social networks",
   "homepage_url": "http://cs.virginia.edu",
-  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDth91jxOpPpN5hQFT1uAUJPLwyeOKaqNMBoEF1s7y9aMGsnx4Sxmg+eQsuTdgtJbHfMHYUIAxqvpXvHYCWXQ9gJLOZ7CbZzoRU2SimAOIF8Pro2CjxRMMT1nNA5EAjUR52h94",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJGkMWn4RXMLn0JY4V3kEFkfdlpJzMcD5pSzM8l86o+lF9sBF8du8lFs+m9EqDBOlDWSCG1ivbPjoUSAbV2pI8r/PuPtZSZw90e/8EtHOAmxfga/aCAMWth83KIyrcfgfbLNCJnUBmtay/JZZhK5OBqCic8QMY6wTX6MSAzSGOtQIDAQAB",
 
   "icons": {
     "16": "icons/icon16.png",
