@@ -1,87 +1,189 @@
-var Facebook = {
-  login: function(callbackSuccess, callbackFailure) {
-    // this is the format for Facebook's OAuth URL
-    var AUTH_URL_FORMAT = 'https://www.facebook.com/dialog/oauth?client_id=CLIENT-ID&response_type=token&redirect_uri=REDIRECT-URI';
+function FacebookConnection(){
+	this.loggedIn = false;
+	this.facebookToken = null;
+	this.cache = {};
+}
 
-    // this is the format for the redirect URI registered on Facebook
-    var REDIRECT_URI_FORMAT = 'https://APP-ID.chromiumapp.org';
+function FacebookConnection(savedFacebookToken){
+	if(!savedFacebookToken){
+		this.loggedIn = false;
+		this.facebookToken = null;
+	}else{
+		this.loggedIn = true;
+		this.facebookToken = savedFacebookToken;
+	}
+}
 
-    // build the OAuth URL
-    var auth_url = AUTH_URL_FORMAT;
+FacebookConnection.prototype.isLoggedIn = function(){
+	return this.loggedIn;
+}
 
-    // add in the client id, given to us by Facebook
-    auth_url = auth_url.replace(/CLIENT-ID/, SecretKeys.facebook.client_id);
+FacebookConnection.prototype.getFacebookToken = function(){
+	var self = this;
+	if (this.loggedIn){
+		return;
+	}
+	
+	var redirect_uri 'https://' + chrome.runtime.id + '.chromiumapp.org';
+	
+	var auth_url = 'https://www.facebook.com/dialog/oauth?'+'
+		client_id='+SecretKeys.facebook.client_id+
+		'&response_type=token&redirect_uri='+redirect_uri+'&scope=manage_notifications,status_update';
+		
+	    chrome.identity.launchWebAuthFlow({url: auth_url, interactive: true},
+	      function(responseURL) {
+	        // check if the login was successful
+	        if(responseURL.indexOf('error_reason') == -1) {
+	          // the user is now logged in, so we will grab and save the access token
+	          var accessToken = responseURL.split('access_token=')[1].split('&')[0];
 
-    // build the redirect URI -- it __MUST__ match what is registered on Facebook
-    var redirect_uri = REDIRECT_URI_FORMAT.replace(/APP-ID/, chrome.runtime.id);
+	          // TODO: we should probably abstract out this part
+	          self.facebookToken = accessToken;
+			  self.loggedIn = true;
+	          // login succeeded - notify the caller
+	          callbackSuccess(accessToken);
+	        } else {
+	          // login failed - notify the caller
+	          callbackFailure();
+	        }
+	    });
+	  }
+}
 
-    // add in the redirect URI
-    auth_url = auth_url.replace(/REDIRECT-URI/, encodeURIComponent(redirect_uri));
+FacebookConnection.prototype.logout = function(callback){
+	var self = this;
+	
+	if (this.loggedIn){
+		chrome.identity.removeCachedAuthToken({token: self.facebookToken}, function(){
+			self.loggedIn = false;
+			self.facebookToken = null;
+			callback();
+		});
+	}
+}
 
-    // ask the user to log into Facebook (using the OAuth URL)
-    chrome.identity.launchWebAuthFlow({url: auth_url, interactive: true},
-      function(responseURL) {
-        // check if the login was successful
-        if(responseURL.indexOf('error_reason') == -1) {
-          // the user is now logged in, so we will grab and save the access token
-          var accessToken = responseURL.split('access_token=')[1].split('&')[0];
+FacebookConnection.prototype.getUser = function(callback){
+	var self = this;
+	if(this.loggedIn){
+		this.makeGETRequest('me', function(parsedResponse){
+			self.user = parsedResponse.data;
+			callback(parsedResponse.data);
+		});
+	} else {
+		throw new Error("You must be logged in");
+	}
+}
 
-          // TODO: we should probably abstract out this part
-          localStorage.facebookToken = accessToken;
+FacebookConnection.prototype.getUsername = function(callback){
+	if (this.loggedIn){
+		if(this.user){
+			callback(this.user.username);
+		}else{
+			this.getUser(function(user){
+				callback(user.username);
+			});
+		}
+	}else{
+		throw new Error("You must be logged in");
+	}
+}
 
-          // login succeeded - notify the caller
-          callbackSuccess(accessToken);
-        } else {
-          // login failed - notify the caller
-          callbackFailure();
-        }
-    });
-  },
+FacebookConnection.prototype.getEmail = function(callback){
+	if (this.loggedIn){
+		if(this.user){
+			callback(this.user.id);
+		}else {
+			this.getUser(function(user){
+				callback(user.id);
+			});
+		}
+	}else {
+		throw new Error("You must be logged in");
+	}
+}
 
-  getUser: function(callback) {
-    // get data from Facebook (the data source)
-    Facebook.makeRequest('GET', 'me', function(parsedResponse) {
-      callback(parsedResponse);
-    });
-  },
+FacebookConnection.prototype.getFeed = function(callback){
+	var self = this;
+	
+	if(this.loggedIn){
+		this.makeGETRequest('me/feed', function(parsedResponse){
+			self.feed = parsedResponse.data;
+			callback(parsedResponse.data);
+		});
+	} else{
+		throw new Error("You must be logged in");
+	}
+}
 
-  getUsername: function(callback) {
-    // get data from Facebook (the data source)
-    Facebook.getUser(function(user) {
-      callback(user.username);
-    });
-  },
+FacebookConnection.prototype.getNotifications = function(callback){
+	var self = this;
+	
+	if(this.loggedIn){
+		this.makeGETRequest('me/notifications', function(parsedResponse){
+			self.notifications = parsedResponse.data;
+			callback(parsedResponse.data);
+		});
+	} else{
+		throw new Error("You must be logged in");
+	}
+}
 
-  getEmail: function(callback) {
-    // get data from Facebook (the data source)
-    Facebook.getUser(function(user) {
-      callback(user.email);
-    });
-  },
+FacebookConnection.prototype.getStatuses = function(callback){
+	var self = this;
+	
+	if(this.loggedIn){
+		this.makeGETRequest('me/statuses', function(parsedResponse){
+			self.statuses = parsedResponse.data;
+			callback(parsedResponse.data);
+		});
+	} else{
+		throw new Error("You must be logged in");
+	}
+}
 
-  getFeed: function(callback) {
-    // get data from Facebook (the data source)
-    Facebook.makeRequest('GET', 'me/feed', function(parsedResponse) {
-      callback(parsedResponse);
-    });
-  },
+FacebookConnection.prototype.getEvents = function(callback){
+	var self = this;
+	
+	if(this.loggedIn){
+		this.makeGETRequest('me/events', function(parsedResponse){
+			self.events = parsedResponse.data;
+			callback(parsedResponse.data);
+		});
+	} else{
+		throw new Error("You must be logged in");
+	}
+}
 
-  makeRequest: function(type, resource, callback) {
-    // TODO: abstraction needed here
-    var facebookToken = localStorage.facebookToken;
+FacebookConnection.prototype.getTagged = function(callback){
+	var self = this;
+	
+	if(this.loggedIn){
+		this.makeGETRequest('me/tagged', function(parsedResponse){
+			self.tagged = parsedResponse.data;
+			callback(parsedResponse.data);
+		});
+	} else{
+		throw new Error("You must be logged in");
+	}
+}
 
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      var parsedResponse = JSON.parse(xhr.response);
-      callback(parsedResponse);
-    };
-    xhr.open(type, 'https://graph.facebook.com/' + resource + '?access_token=' + facebookToken);
-    xhr.send();
-  },
+FacebookConnection.prototype.makeGETRequest = function(resource, callback){
+	var url = null;
+	if(this.loggedIn){
+		url = 'https://graph.facebook.com/'+resource+'?access_token=' + this.facebookToken;
+	}
+	else{
+		url = 'https://graph.facebook.com/'+resource;
+	}
+	
+	$.get(url, callback);
+}
 
-  logout: function(callback) {
-    // TODO: abstraction needed here
-    var facebookToken = localStorage.facebookToken;
-    chrome.identity.removeCachedAuthToken({token: facebookToken}, function(){});
-  }
-};
+FacebookConnection.prototype.makePOSTRequest = function(resource, data, callback){
+	if(this.loggedIn){
+		var url = "https://graph.facebook.com/" + resource + '?access_token=' + this.facebookToken;
+		$.post(url, data, callback);
+	} else {
+		throw new Error("You must be logged in to make a POST request.");
+	}
+}
