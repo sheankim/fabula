@@ -1,0 +1,34 @@
+<html>
+<head>
+ <title>
+ </title>
+ <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.5.1.js">
+</script>
+ <script type="text/javascript">
+ $(document).ready(function () {
+ $('#btnTweet').click(function (e) {
+ alert('redirecting to twitter signin page...');
+ var textToTweet = "This is a tweet for testing purpose.";
+ if (textToTweet.length > 140) {
+ alert('Tweet should be less than 140 Chars');
+ }
+ else {
+ var twtLink = 'http://twitter.com/home?status=' +encodeURIComponent(textToTweet);
+ window.open(twtLink,'_blank');
+ }
+ });
+ });
+ 
+</script>
+ <style type="text/css">
+ #btnTweet {
+ width: 159px;
+ height: 38px;
+ }
+ </style>
+</head>
+ <body>
+ <h1>Welcome to Fabula-twitter dashboard!</h1>
+ <button id="btnTweet">Tweet now!</button>
+ </body>
+</html>
