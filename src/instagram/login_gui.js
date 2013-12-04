@@ -15,7 +15,7 @@ function onInstagramBtnClick() {
     });
   },
   function() {
-    alert("Uh oh! Your login failed. Please try again.")
+    alert("Uh oh! Your login failed. Please try again.");
   });
 }
 

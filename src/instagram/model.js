@@ -25,7 +25,7 @@ var Instagram = {
         // check if the login was successful
         if (responseURL.indexOf('error_reason') == -1) {
           // the user is now logged in, so we will grab and save the access token
-          var accessToken = responseURL.split('=')[1];
+          var accessToken = responseURL.split('access_token=')[1].split('&')[0];
 
           // TODO: we should probably abstract out this part
           localStorage.instagramToken = accessToken;
