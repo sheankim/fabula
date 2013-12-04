@@ -25,10 +25,6 @@ var Facebook = {
         if(responseURL.indexOf('error_reason') == -1) {
           // the user is now logged in, so we will grab and save the access token
           var accessToken = responseURL.split('access_token=')[1].split('&')[0];
-          alert(responseURL);
-          alert(accessToken);
-          console.log(responseURL);
-          console.log(accessToken);
 
           // TODO: we should probably abstract out this part
           localStorage.facebookToken = accessToken;
