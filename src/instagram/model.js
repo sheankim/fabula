@@ -1,3 +1,4 @@
+// TODO: refactor
 var Instagram = {
   login: function(callbackSuccess, callbackFailure) {
     // this is the format for Instagram's OAuth URL
@@ -38,19 +39,29 @@ var Instagram = {
     });
   },
 
-  getUsername: function(callback) {
+  getUser: function(callback) {
+    // get data from Instagram (the data source)
     Instagram.makeRequest('GET', 'users/self', function(parsedResponse) {
-      callback(parsedResponse.data.username);
+      callback(parsedResponse.data);
+    });
+  },
+
+  getUsername: function(callback) {
+    // get data from Instagram (the data source)
+    Instagram.getUser(function(user) {
+      callback(user.username);
     });
   },
 
   getUserId: function(callback) {
-    Instagram.makeRequest('GET', 'users/self', function(parsedResponse) {
-      callback(parsedResponse.data.id);
+    // get data from Instagram (the data source)
+    Instagram.getUser(function(user) {
+      callback(user.id);
     });
   },
 
   getFeed: function(callback) {
+    // get data from Instagram (the data source)
     Instagram.makeRequest('GET', 'users/self/feed', callback);
   },
 
