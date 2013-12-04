@@ -81,6 +81,11 @@ var Instagram = {
   logout: function(callback) {
     // TODO: abstraction needed here
     var instagramToken = localStorage.instagramToken;
-    chrome.identity.removeCachedAuthToken({token: instagramToken}, function(){});
+
+    if (instagramToken) {
+      chrome.identity.removeCachedAuthToken({token: instagramToken}, function() {
+        localStorage.instagramToken = null;
+      });
+    }
   }
 };

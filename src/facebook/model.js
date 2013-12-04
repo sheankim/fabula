@@ -82,6 +82,11 @@ var Facebook = {
   logout: function(callback) {
     // TODO: abstraction needed here
     var facebookToken = localStorage.facebookToken;
-    chrome.identity.removeCachedAuthToken({token: facebookToken}, function(){});
+
+    if (facebookToken) {
+      chrome.identity.removeCachedAuthToken({token: facebookToken}, function() {
+        localStorage.facebookToken = null;
+      });
+    }
   }
 };
