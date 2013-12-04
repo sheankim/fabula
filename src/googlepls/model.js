@@ -1,4 +1,3 @@
-// TODO: refactor
 var Instagram = {
   login: function(callbackSuccess, callbackFailure) {
     // this is the format for Instagram's OAuth URL
@@ -25,7 +24,7 @@ var Instagram = {
         // check if the login was successful
         if (responseURL.indexOf('error_reason') == -1) {
           // the user is now logged in, so we will grab and save the access token
-          var accessToken = responseURL.split('access_token=')[1].split('&')[0];
+          var accessToken = responseURL.split('=')[1];
 
           // TODO: we should probably abstract out this part
           localStorage.instagramToken = accessToken;
@@ -39,29 +38,19 @@ var Instagram = {
     });
   },
 
-  getUser: function(callback) {
-    // get data from Instagram (the data source)
-    Instagram.makeRequest('GET', 'users/self', function(parsedResponse) {
-      callback(parsedResponse.data);
-    });
-  },
-
   getUsername: function(callback) {
-    // get data from Instagram (the data source)
-    Instagram.getUser(function(user) {
-      callback(user.username);
+    Instagram.makeRequest('GET', 'users/self', function(parsedResponse) {
+      callback(parsedResponse.data.username);
     });
   },
 
   getUserId: function(callback) {
-    // get data from Instagram (the data source)
-    Instagram.getUser(function(user) {
-      callback(user.id);
+    Instagram.makeRequest('GET', 'users/self', function(parsedResponse) {
+      callback(parsedResponse.data.id);
     });
   },
 
   getFeed: function(callback) {
-    // get data from Instagram (the data source)
     Instagram.makeRequest('GET', 'users/self/feed', callback);
   },
 
@@ -81,11 +70,6 @@ var Instagram = {
   logout: function(callback) {
     // TODO: abstraction needed here
     var instagramToken = localStorage.instagramToken;
-
-    if (instagramToken) {
-      chrome.identity.removeCachedAuthToken({token: instagramToken}, function() {
-        localStorage.instagramToken = null;
-      });
-    }
+    chrome.identity.removeCachedAuthToken({token: instagramToken}, function(){});
   }
 };
