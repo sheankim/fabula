@@ -27,30 +27,22 @@ InstagramConnection.prototype.getInstagramToken =  function() {
 }
 
 InstagramConnection.prototype.login = function(callbackSuccess, callbackFailure) {
+  var self = this;
+
   // no need to log in twice
   if (this.loggedIn) {
     return;
   }
 
-  // this is the format for Instagram's OAuth URL
-  var AUTH_URL_FORMAT = 'https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&scope=comments+likes+relationships&response_type=token';
-
-  // this is the format for the redirect URI registered on instagram
-  var REDIRECT_URI_FORMAT = 'https://APP-ID.chromiumapp.org';
-
-  var self = this;
+  // build the redirect URI -- it __MUST__ match what is registered on Instagram
+  var redirect_uri = 'https://' + chrome.runtime.id + '.chromiumapp.org';
 
   // build the OAuth URL
-  var auth_url = AUTH_URL_FORMAT;
-
-  // add in the client id, given to us by Instagram
-  auth_url = auth_url.replace(/CLIENT-ID/, SecretKeys.instagram.client_id);
-
-  // build the redirect URI -- it __MUST__ match what is registered on Instagram
-  var redirect_uri = REDIRECT_URI_FORMAT.replace(/APP-ID/, chrome.runtime.id);
-
-  // add in the redirect URI
-  auth_url = auth_url.replace(/REDIRECT-URI/, encodeURIComponent(redirect_uri));
+  var auth_url = 'https://api.instagram.com/oauth/authorize/' +
+    '?client_id=' + SecretKeys.instagram.client_id +
+    '&redirect_uri=' + redirect_uri +
+    '&scope=comments+likes+relationships' +
+    '&response_type=token';
 
   // ask the user to log into Instagram (using the OAuth URL)
   chrome.identity.launchWebAuthFlow({url: auth_url, interactive: true},
