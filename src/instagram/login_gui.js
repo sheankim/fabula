@@ -1,15 +1,19 @@
 // this function is an event handler
 // it gets called when you click on the instagram button
 function onInstagramBtnClick() {
-  Instagram.login(function(accessToken) {
+  var instagram = new InstagramConnection();
+
+  instagram.login(function(accessToken) {
+    localStorage.instagramToken = accessToken;
+
     alert("Yay, we're logged in! The access token is " + accessToken);
 
-    Instagram.getUsername(function(username) {
+    instagram.getUsername(function(username) {
       alert("We've got your username!");
       alert("Your username is " + username);
     });
 
-    Instagram.getFeed(function(feed) {
+    instagram.getFeed(function(feed) {
       alert("We've got the feed!");
       alert(JSON.stringify(feed));
     });

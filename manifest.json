@@ -27,23 +27,23 @@
     "identity",
     "notifications",
     "geolocation",
-    "https://*.twitter.com/*",
+    "https://plus.google.com/*",
     "https://*.facebook.com/*",
     "https://api.instagram.com/*"
-  ],
-  "content_scripts": [
-    {
-      "matches": [
-        // add other oauth authorizing components for facebook and instagram here
-        "http://twitter.com/oauth/authorize",
-        "https://twitter.com/oauth/authorize",
-        "http://api.twitter.com/oauth/authorize",
-        "https://api.twitter.com/oauth/authorize"
-      ],
-      "js": [
-        "js/jquery/jquery.js",
-        "oauth/oauth_authorizer.js"
-      ]
-    }
-  ]
+  ]//,
+  // "content_scripts": [
+  //   {
+  //     "matches": [
+  //       // add other oauth authorizing components for facebook and instagram here
+  //       "http://twitter.com/oauth/authorize",
+  //       "https://twitter.com/oauth/authorize",
+  //       "http://api.twitter.com/oauth/authorize",
+  //       "https://api.twitter.com/oauth/authorize"
+  //     ],
+  //     "js": [
+  //       "js/jquery/jquery.js",
+  //       "oauth/oauth_authorizer.js"
+  //     ]
+  //   }
+  // ]
 }
