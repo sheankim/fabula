@@ -13,10 +13,10 @@ var SecretKeys = {
     client_secret: 'AGG3mit5cWiDo87f7x0hDL2tRt8k55XhsYRMZ3XwCHg',
     client_id: 'zO6E8kLJB6DyQVoh9Jfrng'
   },
-  
+
   facebook:{
-	  client_id: '512526515510999',
-	  client_secret: 'e97ee1b76ccbce0d6797223278ad54d7'
+	  client_id: '550975091661750',
+	  client_secret: '45922ae38a3ee67ea869ec6e22fcc1a4'
   },
 
   instagram: {
