@@ -27,6 +27,7 @@
     "identity",
     "notifications",
     "geolocation",
+    "https://*.twitter.com/*",
     "https://plus.google.com/*",
     "https://*.google.com/*",
     "https://*.facebook.com/*",

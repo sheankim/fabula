@@ -14,6 +14,11 @@ var SecretKeys = {
     client_secret: 'RqjiV3goeYlgGawZirn02AMS'
   },
 
+  twitter: {
+    client_id: 'zO6E8kLJB6DyQVoh9Jfrng'
+    client_secret: 'AGG3mit5cWiDo87f7x0hDL2tRt8k55XhsYRMZ3XwCHg',
+  },
+
   facebook:{
 	  client_id: '550975091661750',
 	  client_secret: '45922ae38a3ee67ea869ec6e22fcc1a4'
@@ -25,7 +30,7 @@ var SecretKeys = {
   },
 
   hasValidKeys: function() {
-    return (this.googlepls.client_id != '' && this.googlepls.client_secret != '') &&
+    return (this.twitter.client_id != '' && this.twitter.client_secret != '') && this.googlepls.client_id != '' && this.googlepls.client_secret != '') &&
       (this.instagram.client_id != '' && this.instagram.client_secret != '') && (this.facebook.client_id != '' && this.facebook.client_secret != '');
   }
 };
