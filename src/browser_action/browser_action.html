@@ -1,4 +1,5 @@
-<!doctype html>
+<html>
+
 <style type="text/css">
 	body {
 		padding: 10px;
@@ -19,45 +20,52 @@
 <script type="text/javascript" src="/src/facebook/model.js"></script>
 <script type="text/javascript" src="/src/facebook/login_gui.js"></script>
 
+<script type="text/javascript" src="/src/twitter/login_gui.js"></script>
+<script type="text/javascript" src="/src/twitter/model.js"></script>
 
 <script type="text/javascript" src="/src/googlepls/login_gui.js"></script>
-<script type="text/javascript" src="/src/googlepls/signinCallback.js"></script>
+<script type="text/javascript" src="/src/googlepls/model.js"></script>
 
-<!-- <script type="text/javascript" src="/oauth/secret_keys.js"></script>
-<script type="text/javascript" src="/src/twitter/model.js"></script>
-<script type="text/javascript" src="/src/twitter/login_gui.js"></script> -->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/client:plusone.js"></script>
+
+
 
 <body>
-  <h1>Welcome!</h1>
+
+      <h1>Welcome!</h1>
   <p>To use Fabula for Chrome you must log into one of your following accounts and approve Fabula for Chrome. Click an icon below to get started!</p>
-
-<!--   <button type="button" class="btn btn-primary" id="googlepls">Google+</button> -->
-
-<!--   <button type="button" class="btn btn-primary" id="twitter" disabled="true">Twitter</button>
-  <button type="button" class="btn btn-primary" id="twitter" disabled="true">Twitter</button> -->
 
   <button type="button" class="btn btn-primary" id="facebook">Facebook</button>
   <button type="button" class="btn btn-primary" id="instagram">Instagram</button>
+  <button type="button" class="btn btn-primary" id="twitter">Twitter</button>
+  
+  <button type="button"
+        class="btn btn-primary"
+        data-scope="https://www.googleapis.com/auth/plus.login"
+        data-requestvisibleactions="http://schemas.google.com/AddActivity"
+        data-clientId="1087500663835-t3e6vbdbcvr82rvf426s33284262obh2.apps.googleusercontent.com"
+        data-callback="onSignInCallback"
+        data-theme="dark"
+        data-cookiepolicy="single_host_origin"
+        id="googlepls">
+        Google+
+  </button>
+  
 
-<!-- This is used to add a button for google+ account authentication, however the button only appears when I load the browser_action.html directly from the browser but not from the extension. You can find the working version here: http://jsfiddle.net/LiveWithMiracle/A4Arn/  -->
-<span id="googlepls">
-  <span
-    class="g-signin"
-    data-callback="signinCallback"
-    data-clientid="1087500663835-t3e6vbdbcvr82rvf426s33284262obh2.apps.googleusercontent.com"
-    data-cookiepolicy="single_host_origin"
-    data-requestvisibleactions="http://schemas.google.com/AddActivity"
-    data-scope="https://www.googleapis.com/auth/plus.login">
-  </span>
-</span>
+  <div id="authOps" style="display:none">
+    <button id="disconnect" >Disconnect your Google account from this app</button>
 
-  <!-- Place this asynchronous JavaScript just before your </body> tag -->
-    <script type="text/javascript">
-      (function() {
-       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-       po.src = 'https://apis.google.com/js/client:plusone.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-     })();
-    </script>
+    <h2>User's profile information</h2>
+    <div id="profile"></div>
+
+    <h2>User's friends that are visible to this app</h2>
+    <div id="visiblePeople"></div>
 
 </body>
+
+</html>
+
+
+
+
