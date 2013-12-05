@@ -1,0 +1,36 @@
+{
+  "name": "fabula",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "29",
+  "description": "A browser extension that gives you updates from all of your favorite social networks",
+  "homepage_url": "http://cs.virginia.edu",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJGkMWn4RXMLn0JY4V3kEFkfdlpJzMcD5pSzM8l86o+lF9sBF8du8lFs+m9EqDBOlDWSCG1ivbPjoUSAbV2pI8r/PuPtZSZw90e/8EtHOAmxfga/aCAMWth83KIyrcfgfbLNCJnUBmtay/JZZhK5OBqCic8QMY6wTX6MSAzSGOtQIDAQAB",
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "fabula",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "identity",
+    "notifications",
+    "geolocation",
+    "https://plus.google.com/*",
+    "https://*.google.com/*",
+    "https://*.facebook.com/*",
+    "https://api.instagram.com/*"
+  ]
+ 
+}
