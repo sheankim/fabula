@@ -27,14 +27,8 @@ function onGoogleplsBtnClick() {
 $(document).ready(function() {
 // register the event handler for when the googlepls button is clicked
   $('#googlepls').click(onGoogleplsBtnClick);
-  $('#disconnect').click(helper.disconnect);
+  $('#disconnect').click(Googlepls.disconnect);
   $('#loaderror').hide();
-  if ($('[data-clientid="YOUR_CLIENT_ID"]').length > 0) {
-    alert('This sample requires your OAuth credentials (client ID) ' +
-        'from the Google APIs console:\n' +
-        '    https://code.google.com/apis/console/#:access\n\n' +
-        'Find and replace YOUR_CLIENT_ID with your client ID.'
-    );
-  }
+ 
 });
 
