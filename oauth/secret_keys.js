@@ -15,7 +15,7 @@ var SecretKeys = {
   },
 
   twitter: {
-    client_id: 'zO6E8kLJB6DyQVoh9Jfrng'
+    client_id: 'zO6E8kLJB6DyQVoh9Jfrng',
     client_secret: 'AGG3mit5cWiDo87f7x0hDL2tRt8k55XhsYRMZ3XwCHg',
   },
 
@@ -30,7 +30,9 @@ var SecretKeys = {
   },
 
   hasValidKeys: function() {
-    return (this.twitter.client_id != '' && this.twitter.client_secret != '') && this.googlepls.client_id != '' && this.googlepls.client_secret != '') &&
-      (this.instagram.client_id != '' && this.instagram.client_secret != '') && (this.facebook.client_id != '' && this.facebook.client_secret != '');
+    return (this.googlepls.client_id != '' && this.googlepls.client_secret != '') &&
+      (this.twitter.client_id != '' && this.twitter.client_secret != '') &&
+      (this.facebook.client_id != '' && this.facebook.client_secret != '') &&
+      (this.instagram.client_id != '' && this.instagram.client_secret != '');
   }
 };

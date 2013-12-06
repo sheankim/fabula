@@ -28,30 +28,31 @@ FacebookConnection.prototype.login = function(callbackSuccess, callbackFailure){
 		return;
 	}
 
-	var redirect_uri 'https://' + chrome.runtime.id + '.chromiumapp.org';
+	var redirect_uri = 'https://' + chrome.runtime.id + '.chromiumapp.org';
 
-	var auth_url = 'https://www.facebook.com/dialog/oauth?'+'
-		client_id='+SecretKeys.facebook.client_id+
-		'&response_type=token&redirect_uri='+redirect_uri+'&scope=manage_notifications,status_update';
+	var auth_url = 'https://www.facebook.com/dialog/oauth'+
+		'?client_id='+SecretKeys.facebook.client_id+
+		'&response_type=token'+
+		'&redirect_uri='+encodeURIComponent(redirect_uri)+
+		'&scope=manage_notifications,status_update';
 
-	    chrome.identity.launchWebAuthFlow({url: auth_url, interactive: true},
-	      function(responseURL) {
-	        // check if the login was successful
-	        if(responseURL.indexOf('error_reason') == -1) {
-	          // the user is now logged in, so we will grab and save the access token
-	          var accessToken = responseURL.split('access_token=')[1].split('&')[0];
+  chrome.identity.launchWebAuthFlow({url: auth_url, interactive: true},
+    function(responseURL) {
+      // check if the login was successful
+      if(responseURL.indexOf('error_reason') == -1) {
+        // the user is now logged in, so we will grab and save the access token
+        var accessToken = responseURL.split('access_token=')[1].split('&')[0];
 
-	          self.facebookToken = accessToken;
-			  		self.loggedIn = true;
+        self.facebookToken = accessToken;
+	  		self.loggedIn = true;
 
-	          // login succeeded - notify the caller
-	          callbackSuccess(accessToken);
-	        } else {
-	          // login failed - notify the caller
-	          callbackFailure();
-	        }
-	    });
-	  }
+        // login succeeded - notify the caller
+        callbackSuccess(accessToken);
+      } else {
+        // login failed - notify the caller
+        callbackFailure();
+      }
+  });
 }
 
 FacebookConnection.prototype.logout = function(callback){
@@ -95,7 +96,7 @@ FacebookConnection.prototype.getUsername = function(callback){
 FacebookConnection.prototype.getEmail = function(callback){
 	if (this.loggedIn){
 		if(this.user){
-			callback(this.user.email;
+			callback(this.user.email);
 		}else {
 			this.getUser(function(user){
 				callback(user.email);

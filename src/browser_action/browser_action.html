@@ -1,82 +1,65 @@
 <html>
+  <head>
+    <style type="text/css">
+    	body {
+    		padding: 10px;
+    		height: 200px;
+    		width: 400px;
+    	}
+    </style>
 
-<style type="text/css">
-	body {
-		padding: 10px;
-		height: 200px;
-		width: 400px;
-	}
-</style>
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"></script>
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
 
-<link rel="stylesheet" href="/css/bootstrap/bootstrap.css"></script>
-<script type="text/javascript" src="/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="/oauth/secret_keys.js"></script>
 
-<script type="text/javascript" src="/oauth/secret_keys.js"></script>
+    <script type="text/javascript" src="/src/instagram/model.js"></script>
+    <script type="text/javascript" src="/src/instagram/login_gui.js"></script>
 
-<script type="text/javascript" src="/src/instagram/model.js"></script>
-<script type="text/javascript" src="/src/instagram/login_gui.js"></script>
+    <script type="text/javascript" src="/src/facebook/model.js"></script>
+    <script type="text/javascript" src="/src/facebook/login_gui.js"></script>
 
-<script type="text/javascript" src="/src/facebook/model.js"></script>
-<script type="text/javascript" src="/src/facebook/login_gui.js"></script>
+    <script type="text/javascript" src="/src/twitter/login_gui.js"></script>
+    <script type="text/javascript" src="/src/twitter/model.js"></script>
 
-<script type="text/javascript" src="/src/twitter/login_gui.js"></script>
-<script type="text/javascript" src="/src/twitter/model.js"></script>
+    <script type="text/javascript" src="/src/googlepls/login_gui.js"></script>
+    <script type="text/javascript" src="/src/googlepls/model.js"></script>
 
-<script type="text/javascript" src="/src/googlepls/login_gui.js"></script>
-<script type="text/javascript" src="/src/googlepls/model.js"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/client:plusone.js"></script>
+  </head>
 
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-<script type="text/javascript" src="https://apis.google.com/js/client:plusone.js"></script>
+  <body>
+    <h1>Welcome!</h1>
+    <p>To use Fabula for Chrome you must log into one of your following accounts and approve Fabula for Chrome. Click an icon below to get started!</p>
 
+    <button type="button" class="btn btn-primary" id="facebook">Facebook</button>
+    <button type="button" class="btn btn-primary" id="instagram">Instagram</button>
+    <button type="button" class="btn btn-primary" id="twitter">Twitter</button>
 
+    <button type="button"
+          class="btn btn-primary"
+          data-scope="https://www.googleapis.com/auth/plus.login"
+          data-requestvisibleactions="http://schemas.google.com/AddActivity"
+          data-clientId="1087500663835-t3e6vbdbcvr82rvf426s33284262obh2.apps.googleusercontent.com"
+          data-callback="onSignInCallback"
+          data-theme="dark"
+          data-cookiepolicy="single_host_origin"
+          id="googlepls">
+          Google+
+    </button>
 
-<body>
+    <div id="authOps" style="display:none">
+      <button id="disconnect" >Disconnect your Google account from this app</button>
+      <h2>User's profile information</h2>
+      <div id="profile"></div>
 
+      <h2>User's friends that are visible to this app</h2>
+      <div id="visiblePeople"></div>
+    </div>
 
-<script type="text/javascript" src="/src/googlepls/login_gui.js"></script>
-<script type="text/javascript" src="/src/googlepls/model.js"></script>
-
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-<script type="text/javascript" src="https://apis.google.com/js/client:plusone.js"></script>
-
-
-
-<body>
-
-      <h1>Welcome!</h1>
-  <p>To use Fabula for Chrome you must log into one of your following accounts and approve Fabula for Chrome. Click an icon below to get started!</p>
-
-  <button type="button" class="btn btn-primary" id="facebook">Facebook</button>
-  <button type="button" class="btn btn-primary" id="instagram">Instagram</button>
-  <button type="button" class="btn btn-primary" id="twitter">Twitter</button>
-  
-  <button type="button"
-        class="btn btn-primary"
-        data-scope="https://www.googleapis.com/auth/plus.login"
-        data-requestvisibleactions="http://schemas.google.com/AddActivity"
-        data-clientId="1087500663835-t3e6vbdbcvr82rvf426s33284262obh2.apps.googleusercontent.com"
-        data-callback="onSignInCallback"
-        data-theme="dark"
-        data-cookiepolicy="single_host_origin"
-        id="googlepls">
-        Google+
-  </button>
-
-
-  <div id="authOps" style="display:none">
-    <button id="disconnect" >Disconnect your Google account from this app</button>
-
-
-  <div id="authOps" style="display:none">
-    <button id="disconnect" >Disconnect your Google account from this app</button>
-    <h2>User's profile information</h2>
-    <div id="profile"></div>
-
-    <h2>User's friends that are visible to this app</h2>
-    <div id="visiblePeople"></div>
-
-</body>
+  </body>
 
 </html>
 

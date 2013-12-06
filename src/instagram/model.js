@@ -40,7 +40,7 @@ InstagramConnection.prototype.login = function(callbackSuccess, callbackFailure)
   // build the OAuth URL
   var auth_url = 'https://api.instagram.com/oauth/authorize/' +
     '?client_id=' + SecretKeys.instagram.client_id +
-    '&redirect_uri=' + redirect_uri +
+    '&redirect_uri=' + encodeURIComponent(redirect_uri) +
     '&scope=comments+likes+relationships' +
     '&response_type=token';
 
