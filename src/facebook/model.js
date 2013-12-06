@@ -71,8 +71,8 @@ FacebookConnection.prototype.getUser = function(callback){
 	var self = this;
 	if(this.loggedIn){
 		this.makeGETRequest('me', function(parsedResponse){
-			self.user = parsedResponse.data;
-			callback(parsedResponse.data);
+			self.user = parsedResponse;
+			callback(parsedResponse);
 		});
 	} else {
 		throw new Error("You must be logged in");
