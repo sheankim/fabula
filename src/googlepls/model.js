@@ -16,8 +16,6 @@ var Googlepls = (function() {
           Googlepls.profile();
           Googlepls.people();
         } else if (authResult['error']) {
-          // There was an error, which means the user is not signed in.
-          // As an example, you can handle by writing to the console:
           console.log('There was an error: ' + authResult['error']);
           $('#authResult').append('Logged out');
           $('#authOps').hide('slow');
