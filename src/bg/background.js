@@ -1,13 +1,41 @@
-// if you checked "fancy-settings" in extensionizr.com, uncomment this lines
+var socialNetworks = [];
 
-// var settings = new Store("settings", {
-//     "sample_setting": "This is how you use Store.js to remember values"
-// });
+(function() {
+  var config = Settings.getInstance();
 
+  if (config.getProperty('instagram')) {
+    var instagram = new InstagramAPI();
 
-//example of using a message handler from the inject scripts
-chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
-  });
+    // verify that the OAuth key is actually cached
+    instagram.login(function(success) {
+      if (success) {
+        socialNetworks.push(instagram);
+      } else {
+        config.setProperty('instagram', undefined);
+      }
+    });
+  }
+
+  if (config.getProperty('facebook')) {
+    var facebook = new FacebookAPI();
+
+    // verify that the OAuth key is actually cached
+    facebook.login(function(success) {
+      if (success) {
+        socialNetworks.push(facebook);
+      } else {
+        config.setProperty('facebook', undefined);
+      }
+    });
+  }
+
+  // wait 5 seconds for the login transactions to finish
+  window.setTimeout(function() {
+    // which default view to render: getting_started or fabula
+    if (socialNetworks.length == 0) {
+      chrome.browserAction.setPopup({popup: 'src/browser_action/getting_started.html'});
+    } else {
+      chrome.browserAction.setPopup({popup: 'src/browser_action/fabula.html'});
+    }
+  }, 5000);
+})();

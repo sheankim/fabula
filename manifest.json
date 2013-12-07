@@ -14,14 +14,14 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": ["src/bg/background.js"],
+    "page": "src/bg/background.html",
     "persistent": true
   },
   "options_page": "src/options/index.html",
   "browser_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "fabula",
-    "default_popup": "src/browser_action/browser_action.html"
+    "default_popup": "src/browser_action/getting_started.html"
   },
   "permissions": [
     "identity",

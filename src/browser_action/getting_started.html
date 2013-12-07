@@ -1,5 +1,7 @@
 <html>
   <head>
+    <title>Fabula - Getting Started</title>
+
     <style type="text/css">
     	body {
     		padding: 10px;
@@ -8,18 +10,25 @@
     	}
     </style>
 
+    <!-- JQuery and Twitter Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"></script>
     <script type="text/javascript" src="/js/jquery/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
 
+    <!-- plugin for implementing actual OOP in JS -->
+    <script type="text/javascript" src="/js/jsclass/src/core.js"></script>
+    <script type="text/javascript" src="/js/jsclass/chrome_loader.js"></script>
+
+    <script type="text/javascript" src="/src/settings.js"></script>
+
     <script type="text/javascript" src="/oauth/secret_keys.js"></script>
+    <script type="text/javascript" src="/src/oauth_helper.js"></script>
 
-    <script type="text/javascript" src="/src/instagram/model.js"></script>
-    <script type="text/javascript" src="/src/instagram/login_gui.js"></script>
+    <script type="text/javascript" src="../instagram/api.js"></script>
+    <script type="text/javascript" src="../facebook/api.js"></script>
+    <script type="text/javascript" src="getting_started.js"></script>
 
-    <script type="text/javascript" src="/src/facebook/model.js"></script>
-    <script type="text/javascript" src="/src/facebook/login_gui.js"></script>
-
+    <!--
     <script type="text/javascript" src="/src/twitter/login_gui.js"></script>
     <script type="text/javascript" src="/src/twitter/model.js"></script>
 
@@ -28,6 +37,7 @@
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
     <script type="text/javascript" src="https://apis.google.com/js/client:plusone.js"></script>
+    -->
   </head>
 
   <body>
@@ -36,6 +46,7 @@
 
     <button type="button" class="btn btn-primary" id="facebook">Facebook</button>
     <button type="button" class="btn btn-primary" id="instagram">Instagram</button>
+    <!--
     <button type="button" class="btn btn-primary" id="twitter">Twitter</button>
 
     <button type="button"
@@ -58,9 +69,9 @@
       <h2>User's friends that are visible to this app</h2>
       <div id="visiblePeople"></div>
     </div>
+    -->
 
   </body>
-
 </html>
 
 
