@@ -97,7 +97,7 @@ OAuthHelper.prototype.get = function(resource, callback) {
   $.get(url, callback);
 };
 
-OAuthHelper.prototype.post = function(resource, callback) {
+OAuthHelper.prototype.post = function(resource, data, callback) {
   // sanity checks
   if (!callback) {
     throw new Error("Missing parameter: callback (of the form function(response))");
@@ -106,7 +106,7 @@ OAuthHelper.prototype.post = function(resource, callback) {
   }
 
   var url = this.buildURL(resource);
-  $.post(url, callback);
+  $.post(url, data, callback);
 };
 
 OAuthHelper.prototype.del = function(resource, callback) {
