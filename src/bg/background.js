@@ -1,41 +1,22 @@
-var socialNetworks = [];
+// this is like the controller for the application
+// it tells the browser which view (html file) to render inside the popup
 
 (function() {
   var config = Settings.getInstance();
+  var total = 0;
 
   if (config.getProperty('instagram')) {
-    var instagram = new InstagramAPI();
-
-    // verify that the OAuth key is actually cached
-    instagram.login(function(success) {
-      if (success) {
-        socialNetworks.push(instagram);
-      } else {
-        config.setProperty('instagram', undefined);
-      }
-    });
+    total += 1;
   }
 
   if (config.getProperty('facebook')) {
-    var facebook = new FacebookAPI();
-
-    // verify that the OAuth key is actually cached
-    facebook.login(function(success) {
-      if (success) {
-        socialNetworks.push(facebook);
-      } else {
-        config.setProperty('facebook', undefined);
-      }
-    });
+    total += 1;
   }
 
-  // wait 5 seconds for the login transactions to finish
-  window.setTimeout(function() {
-    // which default view to render: getting_started or fabula
-    if (socialNetworks.length == 0) {
-      chrome.browserAction.setPopup({popup: 'src/browser_action/getting_started.html'});
-    } else {
-      chrome.browserAction.setPopup({popup: 'src/browser_action/fabula.html'});
-    }
-  }, 5000);
+  // which default view to render: getting_started or fabula
+  if (total == 0) {
+    chrome.browserAction.setPopup({popup: 'src/browser_action/getting_started.html'});
+  } else {
+    chrome.browserAction.setPopup({popup: 'src/browser_action/fabula.html'});
+  }
 })();

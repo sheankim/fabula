@@ -19,6 +19,13 @@ var InstagramAPI = new Class({
     return this.oauthHelper.isAuthorized();
   },
 
+  getAccessToken: function() {
+    if (!this.isLoggedIn()) {
+      throw new Error("Must be logged in to get the access token");
+    }
+    return this.oauthHelper.getAccessToken();
+  },
+
   login: function(callback) {
     // no need to log in twice
     if (this.isLoggedIn()) {

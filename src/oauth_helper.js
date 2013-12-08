@@ -28,7 +28,7 @@ OAuthHelper.prototype.getAccessToken = function() {
 OAuthHelper.prototype.performLogin = function(callback) {
   var self = this;
 
-  // sanity checks
+  // sanity check
   if (!callback) {
     throw new Error("Missing parameter: callback (of the form function(success))");
   }
@@ -37,7 +37,10 @@ OAuthHelper.prototype.performLogin = function(callback) {
   chrome.identity.launchWebAuthFlow({url: self.authURL, interactive: true},
     function(responseURL) {
       // check if the login was successful
-      if (responseURL.indexOf('error_reason') == -1) {
+      if (!responseURL || responseURL.indexOf('error_reason') != -1) {
+        // login failed - notify the caller
+        callback(false);
+      } else {
         // the user is now logged in, so we will grab and save the access token
         var accessToken = responseURL.split('access_token=')[1].split('&')[0];
 
@@ -47,9 +50,6 @@ OAuthHelper.prototype.performLogin = function(callback) {
 
         // login succeeded - notify the caller
         callback(true);
-      } else {
-        // login failed - notify the caller
-        callback(false);
       }
   });
 };

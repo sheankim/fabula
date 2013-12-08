@@ -40,6 +40,17 @@ var Settings = new Class({
     this.file[name] = value;
   },
 
+  removeProperty: function(name) {
+    // sanity check
+    if (!name) {
+      throw new Error("Missing parameter: name (the setting's name)");
+    }
+
+    if (this.file[name]) {
+      delete this.file[name];
+    }
+  },
+
   clear: function() {
     this.file.clear();
   }

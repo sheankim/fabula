@@ -1,32 +1,27 @@
 <html>
   <head>
-    <title>Fabula - Background Page</title>
-
-    <style type="text/css">
-      body {
-        padding: 10px;
-        height: 400px;
-        width: 400px;
-      }
-    </style>
-
-    <!-- JQuery and Twitter Bootstrap -->
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"></script>
     <script type="text/javascript" src="/js/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
 
     <!-- plugin for implementing actual OOP in JS -->
     <script type="text/javascript" src="/js/jsclass/src/core.js"></script>
     <script type="text/javascript" src="/js/jsclass/chrome_loader.js"></script>
 
+    <!-- persistence layer -->
     <script type="text/javascript" src="/src/settings.js"></script>
 
+    <!-- authorization stuff -->
     <script type="text/javascript" src="/oauth/secret_keys.js"></script>
     <script type="text/javascript" src="/src/oauth_helper.js"></script>
 
+    <!-- bindings for social networks -->
+    <script type="text/javascript" src="/src/social_network_adapter.js"></script>
     <script type="text/javascript" src="/src/instagram/api.js"></script>
+    <script type="text/javascript" src="/src/instagram/adapter.js"></script>
     <script type="text/javascript" src="/src/facebook/api.js"></script>
+    <script type="text/javascript" src="/src/facebook/adapter.js"></script>
+    <script type="text/javascript" src="/src/social_network_adapter.js"></script>
 
+    <!-- background script -->
     <script type="text/javascript" src="/src/bg/background.js"></script>
   </head>
 

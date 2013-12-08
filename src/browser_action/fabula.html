@@ -1,4 +1,4 @@
-<html>
+<html ng-app ng-csp>
   <head>
     <title>Fabula - Getting Started</title>
 
@@ -15,20 +15,41 @@
     <script type="text/javascript" src="/js/jquery/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
 
+    <!-- AngularJS -->
+    <script src="/js/angular/angular.js"></script>
+
     <!-- plugin for implementing actual OOP in JS -->
     <script type="text/javascript" src="/js/jsclass/src/core.js"></script>
     <script type="text/javascript" src="/js/jsclass/chrome_loader.js"></script>
 
+    <!-- persistence layer -->
     <script type="text/javascript" src="/src/settings.js"></script>
 
+    <!-- authorization stuff -->
     <script type="text/javascript" src="/oauth/secret_keys.js"></script>
     <script type="text/javascript" src="/src/oauth_helper.js"></script>
 
+    <!-- bindings for social networks -->
+    <script type="text/javascript" src="/src/social_network_adapter.js"></script>
     <script type="text/javascript" src="/src/instagram/api.js"></script>
+    <script type="text/javascript" src="/src/instagram/adapter.js"></script>
     <script type="text/javascript" src="/src/facebook/api.js"></script>
+    <script type="text/javascript" src="/src/facebook/adapter.js"></script>
+    <script type="text/javascript" src="/src/social_network_factory.js"></script>
+
+    <!-- generate the content for this page's body -->
+    <script type="text/javascript" src="fabula.js"></script>
   </head>
 
   <body>
-    <!-- put fabula GUI code here -->
+    <h1>Fabula</h1>
+
+    <ul class="unstyled">
+      <li ng-repeat="newsItem in newsItems">
+        <img ng-model="fabula" ng-src="{{newsItem.imgURL}}" />
+        <cite>By {{newsItem.author}}</cite>
+        <p>{{newsItem.caption}}</p>
+      </li>
+    </ul>
   </body>
 </html>

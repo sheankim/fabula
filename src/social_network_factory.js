@@ -1,6 +1,6 @@
-var SocialNetwork = new Class({
+var SocialNetworkFactory = new Class({
   extend: {
-    find: function(name) {
+    create: function(name) {
       if (!name) {
         throw new Error("Missing parameter: name (social network name");
       } else if (name == 'instagram') {
@@ -11,3 +11,5 @@ var SocialNetwork = new Class({
     }
   }
 });
+
+
